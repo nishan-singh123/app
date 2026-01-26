@@ -7,4 +7,5 @@ const NewsPage = () => {
 
   return <div className="text-7xl">Global Count: {globalCount}</div>;
 };
+
 export default NewsPage;
