@@ -177,7 +177,8 @@ The 3 core concepts of redux:
 
 3. Reducer: Binds store and action, stores the state data, responsible for UI transition
 
-Thunk action
+### Thunk action
+
 Async redux action
 ==============================================
 

@@ -1,25 +1,31 @@
 "use client";
 
 import { login } from "@/api/auth";
+import PasswordInput from "@/components/form/PasswordInput";
 import Logo from "@/components/Logo";
+import Spinner from "@/components/Spinner";
 import { REGISTER_ROUTE } from "@/constants/routes";
+import { loginUser } from "@/redux/auth/authActions";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
 
-  async function submitForm(data){
-    try {
-      const result = await login(data);
+  const dispatch = useDispatch();
 
-      localStorage.setItem("authToken", result.token)
+  const { loading, error } = useSelector((state) => state.auth);
 
-      console.log(result);
-    } catch (error) {
-      console.log(error.response.data);
-    }
+  function submitForm(data) {
+    dispatch(loginUser(data));
   }
+
+  useEffect(() => {
+    if (error) toast.error(error);
+  }, [error]);
 
   return (
     <div className="flex mt-36 items-center justify-center w-full px-4">
@@ -42,19 +48,15 @@ const LoginPage = () => {
           </div>
           <div className="mt-6">
             <label className="font-medium">Password</label>
-            <input
-              placeholder="Please enter your password"
-              className="mt-2 rounded-md ring ring-gray-200 focus:ring-2 focus:ring-primary outline-none px-3 py-3 w-full"
-              required
-              type="password"
-              {...register("password")}
-            />
+            <PasswordInput {...register("password")} />
           </div>
           <button
             type="submit"
-            className="mt-8 py-3 w-full cursor-pointer rounded-md bg-primary text-white transition hover:bg-blue-700"
+            disabled={loading}
+            className="flex items-center justify-center gap-3 mt-8 py-3 w-full cursor-pointer rounded-md bg-primary text-white transition hover:bg-blue-700 disabled:opacity-80"
           >
             Login
+            {loading && <Spinner className="h-6 w-6 fill-primary" />}
           </button>
           <p className="text-center py-8">
             Don&apos;t have an account?

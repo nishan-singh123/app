@@ -1,13 +1,13 @@
+import ProductsFilter from "@/components/products/Filter";
 import { FaImage, FaShoppingCart } from "react-icons/fa";
 
 export const LoadingCard = () => {
   return (
     <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition duration-300 animate-pulse">
       <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
-        <FaImage className="text-gray-300 text-7xl"/>
+        <FaImage className="text-gray-300 text-7xl" />
       </div>
-      <div className="absolute top-3 right-3 bg-primary z-10 w-14 h-6 rounded-xl">
-      </div>
+      <div className="absolute top-3 right-3 bg-primary z-10 w-14 h-6 rounded-xl"></div>
       <div className="p-4">
         <div className="bg-gray-300 w-3/4 h-7 mb-3"></div>
         <div className="bg-primary/10 w-24 h-5 rounded"></div>
@@ -28,16 +28,19 @@ export const LoadingCard = () => {
 
 const ProductsLoading = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-      <LoadingCard />
-      <LoadingCard />
-      <LoadingCard />
-      <LoadingCard />
-      <LoadingCard />
-      <LoadingCard />
-      <LoadingCard />
-      <LoadingCard />
-    </div>
+   <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] xl:grid-cols-[1fr_4fr] gap-8">
+      <ProductsFilter />
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+        <LoadingCard />
+      </div>
+    </section>
   );
 };
 
