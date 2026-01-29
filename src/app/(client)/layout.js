@@ -1,13 +1,12 @@
 "use client";
 
-import Sidebar from "@/components/admin/Sidebar";
 import Spinner from "@/components/Spinner";
 import { LOGIN_ROUTE } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const AdminLayout = ({ children }) => {
+const ClientLayout = ({ children }) => {
   const { user } = useSelector((state) => state.auth);
 
   const router = useRouter();
@@ -17,13 +16,7 @@ const AdminLayout = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  if (user)
-    return (
-      <>
-        <Sidebar />
-        <div className="p-6 sm:ml-64">{children}</div>
-      </>
-    );
+  if (user) return <div>{children}</div>;
 
   return (
     <div className="py-24 flex items-center justify-center">
@@ -32,4 +25,4 @@ const AdminLayout = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default ClientLayout;

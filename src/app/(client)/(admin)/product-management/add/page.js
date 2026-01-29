@@ -7,7 +7,7 @@ const AddProductPage = () => {
       <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
         Add a new product
       </h2>
-     <ProductForm />
+      <ProductForm />
     </div>
   </section>
   );

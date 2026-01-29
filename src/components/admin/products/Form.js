@@ -1,6 +1,6 @@
 "use client";
 
-import { addProduct } from "@/api/products";
+import { addProduct, updateProduct } from "@/api/products";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,8 +10,16 @@ import { useForm } from "react-hook-form";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-const ProductForm = () => {
-  const { register, handleSubmit } = useForm();
+const ProductForm = ({ product }) => {
+  const { register, handleSubmit } = useForm({
+    values: {
+      name: product?.name ?? "",
+      brand: product?.brand ?? "",
+      category: product?.category ?? "",
+      price: product?.price ?? "",
+      stock: product?.stock ?? "",
+    },
+  });
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,8 +45,9 @@ const ProductForm = () => {
 
   const router = useRouter();
 
-  function submitForm(data) {
+  async function submitForm(data) {
     setLoading(true);
+
     const formdata = new FormData();
 
     formdata.append("name", data.name);
@@ -55,13 +64,24 @@ const ProductForm = () => {
       });
     }
 
-    addProduct(formdata)
-      .then(() => {
+    try {
+      if (product) {
+        await updateProduct(product._id, formdata);
+
+        toast.success("Product updated successfully");
+      } else {
+        await addProduct(formdata);
+
         toast.success("Product created successfully");
-        router.back();
-      })
-      .catch((error) => toast.error(error.response?.data))
-      .finally(() => setLoading(false));
+      }
+
+      router.back();
+      router.refresh();
+    } catch (error) {
+      toast.error(error.response?.data);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -234,7 +254,9 @@ const ProductForm = () => {
         disabled={loading}
         className="disabled:opacity-80 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-600 cursor-pointer"
       >
-        <span className="mr-2">Add product</span>
+        <span className="mr-2">
+          {product ? "Update Product" : "Add Product"}
+        </span>
         {loading ? (
           <Spinner className="ml-2 h-5 w-5 fill-primary" />
         ) : (
