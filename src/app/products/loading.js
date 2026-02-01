@@ -1,5 +1,6 @@
 import ProductsFilter from "@/components/products/Filter";
-import { FaImage, FaShoppingCart } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 export const LoadingCard = () => {
   return (
@@ -17,8 +18,8 @@ export const LoadingCard = () => {
             <div className="bg-gray-200 w-24 h-5"></div>
             <div className="bg-gray-100 w-20 h-4 ml-1"></div>
           </div>
-          <button className="min-w-10 h-10 text-lg bg-primary text-white px-2.5 py-2 rounded-full">
-            <FaShoppingCart />
+          <button className="min-w-10 h-10 text-lg bg-primary text-white hover:bg-secondary px-3 py-2.5 rounded-full cursor-pointer">
+            <MdOutlineAddShoppingCart />
           </button>
         </div>
       </div>
@@ -28,7 +29,7 @@ export const LoadingCard = () => {
 
 const ProductsLoading = () => {
   return (
-   <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] xl:grid-cols-[1fr_4fr] gap-8">
+    <section className="grid grid-cols-1 md:grid-cols-[1fr_2fr] xl:grid-cols-[1fr_4fr] gap-8">
       <ProductsFilter />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
         <LoadingCard />

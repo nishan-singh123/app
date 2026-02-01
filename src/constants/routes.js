@@ -9,6 +9,7 @@ export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const RESET_PASSWORD_ROUTE = "/reset-password";
 
 export const PROFILE_ROUTE = "/profile";
+export const CART_ROUTE = "/cart";
 
 // Admin routes
 export const DASHBOARD_ROUTE = "/dashboard";

@@ -10,7 +10,7 @@ const ThemeToggler = () => {
   return (
     <button
       onClick={() => dispatch(toggleTheme())}
-      className="text-gray-700 px-2 py-1 dark:text-gray-300 hover:text-primary dark:hover:text-primary cursor-pointer"
+      className="text-gray-700 p-1 dark:text-gray-300 hover:text-primary dark:hover:text-primary cursor-pointer"
     >
       <FaMoon className="dark:hidden" />
       <FaSun className="hidden dark:block" />

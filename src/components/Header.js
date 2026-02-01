@@ -1,13 +1,12 @@
 import {
   FaBars,
-  FaShoppingCart,
-  FaUser,
 } from "react-icons/fa";
 
 import Navlink from "./Navlink";
 import Logo from "./Logo";
 import ThemeToggler from "./ThemeToggler";
 import User from "./User";
+import HeaderCart from "./HeaderCart";
 
 const Header = () => {
   return (
@@ -20,9 +19,7 @@ const Header = () => {
           <Navlink />
           <div className="flex items-center gap-2">
           <ThemeToggler />
-            <button className="text-gray-700 px-2 py-1 dark:text-gray-300 hover:text-primary dark:hover:text-primary">
-              <FaShoppingCart />
-            </button>
+            <HeaderCart />
             <User />
             <button className="block md:hidden text-gray-700 px-2 py-1 dark:text-gray-300 dark:hover:text-primary">
               <FaBars />

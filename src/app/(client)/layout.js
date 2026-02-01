@@ -1,6 +1,7 @@
 "use client";
 
 import Spinner from "@/components/Spinner";
+import Sidebar from "@/components/admin/Sidebar";
 import { LOGIN_ROUTE } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -16,7 +17,13 @@ const ClientLayout = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  if (user) return <div>{children}</div>;
+if (user)
+    return (
+      <div>
+        <Sidebar />
+        <div className="p-6 sm:ml-64">{children}</div>
+      </div>
+    );
 
   return (
     <div className="py-24 flex items-center justify-center">

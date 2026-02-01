@@ -1,19 +1,27 @@
 import { PRODUCTS_ROUTE } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
+import AddToCart from "./AddToCart";
 
 const ProductCard = ({ _id, name, price, brand, category, imageUrls }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:-translate-y-1 transition duration-300">
       <Link href={`${PRODUCTS_ROUTE}/${_id}`} className="relative">
-        <Image
-          src={imageUrls[0]}
-          alt={name}
-          className="w-full h-48 object-cover"
-          height={400}
-          width={600}
-        />
+        {imageUrls.length > 0 ? (
+          <Image
+            src={imageUrls[0]}
+            alt={name}
+            className="w-full h-48 object-cover"
+            height={400}
+            width={600}
+          />
+        ) : (
+          <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
+            <FaImage className="text-gray-300 text-7xl" />
+          </div>
+        )}
+
         <span className="absolute top-3 right-3 bg-teal-700 text-white text-xs font-medium px-2 py-1 rounded-xl">
           {brand}
         </span>
@@ -40,9 +48,7 @@ const ProductCard = ({ _id, name, price, brand, category, imageUrls }) => {
               Rs. {price * 1.05}
             </span>
           </div>
-          <button className="min-w-10 h-10 text-lg bg-primary text-white hover:bg-secondary px-2.5 py-2 rounded-full">
-            <FaShoppingCart />
-          </button>
+          <AddToCart product={{id: _id, name, price, imageUrls}} />
         </div>
       </div>
     </div>
