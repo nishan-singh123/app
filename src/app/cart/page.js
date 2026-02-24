@@ -1,6 +1,7 @@
 "use client";
 
 import { createOrder } from "@/api/orders";
+import { ORDER_STATUS_PENDING } from "@/constants/order";
 import { ORDERS_ROUTE, PRODUCTS_ROUTE } from "@/constants/routes";
 import {
   clearCart,
@@ -49,7 +50,7 @@ const CartPage = () => {
       totalPrice: Math.ceil(totalPrice * 1.13) + 200,
     })
       .then(() => {
-        router.push(ORDERS_ROUTE);
+        router.push(`${ORDERS_ROUTE}?status=${ORDER_STATUS_PENDING}`);
 
         toast.success("Order created successfully.", {
           onClose: () => {
