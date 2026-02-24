@@ -1,7 +1,14 @@
 "use client";
 
-import { DASHBOARD_ROUTE, LOGIN_ROUTE, ORDERS_ROUTE, PROFILE_ROUTE } from "@/constants/routes";
+import { ORDER_STATUS_PENDING } from "@/constants/order";
+import {
+  DASHBOARD_ROUTE,
+  LOGIN_ROUTE,
+  ORDERS_ROUTE,
+  PROFILE_ROUTE,
+} from "@/constants/routes";
 import { logout } from "@/redux/auth/authSlice";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
@@ -28,9 +35,21 @@ const User = () => {
     <div className="relative">
       <button
         onClick={() => setShow(true)}
-        className="border-2 rounded-full h-9 min-w-9 flex items-center justify-center text-gray-700 px-2 py-1 dark:text-gray-300 hover:text-primary dark:hover:text-primary cursor-pointer"
+        className="border-2 rounded-full h-9 min-w-9 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary cursor-pointer"
       >
-        <FaUser />
+        {user?.profileImageUrl ? (
+          <Image
+            src={user.profileImageUrl}
+            height={64}
+            width={64}
+            alt={user.name}
+            className="h-8 w-8 rounded-full"
+          />
+        ) : (
+          <div className="px-2 py-1">
+            <FaUser />
+          </div>
+        )}
       </button>
 
       {show && (
@@ -57,7 +76,7 @@ const User = () => {
                 Dashboard
               </Link>
               <Link
-                href={ORDERS_ROUTE}
+                href={`${ORDERS_ROUTE}?status=${ORDER_STATUS_PENDING}`}
                 className="py-1 px-4 text-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 hover:bg-gray-200"
               >
                 Orders

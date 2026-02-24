@@ -4,7 +4,7 @@ import { login } from "@/api/auth";
 import PasswordInput from "@/components/form/PasswordInput";
 import Logo from "@/components/Logo";
 import Spinner from "@/components/Spinner";
-import { REGISTER_ROUTE } from "@/constants/routes";
+import { FORGOT_PASSWORD_ROUTE, REGISTER_ROUTE } from "@/constants/routes";
 import { loginUser } from "@/redux/auth/authActions";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -50,6 +50,7 @@ const LoginPage = () => {
             <label className="font-medium">Password</label>
             <PasswordInput {...register("password")} />
           </div>
+          <Link className="p-2 inline-block text-sm text-primary hover:underline" href={FORGOT_PASSWORD_ROUTE}>Forgot password</Link>
           <button
             type="submit"
             disabled={loading}
