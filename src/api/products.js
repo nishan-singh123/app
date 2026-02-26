@@ -4,7 +4,7 @@ import axios from "axios";
 import config from "@/config/config";
 
 export const getProducts = async (searchParams) => {
-  const query = formatQuery(await searchParams);
+  const query = formatQuery(searchParams);
 
   const response = await axios.get(`${config.apiUrl}/api/products?${query}`);
 
@@ -31,6 +31,18 @@ export const updateProduct = async (id, data) => {
 
 export const deleteProduct = async (id) => {
   const response = await api.delete(`/api/products/${id}`);
+
+  return response.data;
+};
+
+export const getProductBrands = async () => {
+  const response = await axios.get(`${config.apiUrl}/api/products/brands`);
+
+  return response.data;
+};
+
+export const getProductCategories = async () => {
+  const response = await axios.get(`${config.apiUrl}/api/products/categories`);
 
   return response.data;
 };

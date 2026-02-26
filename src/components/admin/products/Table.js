@@ -2,12 +2,11 @@ import { PRODUCT_MANAGEMENT_ROUTE } from "@/constants/routes";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import {FaImage, FaPencilAlt} from "react-icons/fa";
+import { FaImage, FaPencilAlt } from "react-icons/fa";
 import DeleteProduct from "./Delete";
 import TableHeader from "./TableHeader";
 
 const ProductsTable = ({ products }) => {
-
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

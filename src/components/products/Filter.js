@@ -4,11 +4,11 @@ import { PRODUCTS_ROUTE } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const DEFAULT_SORT = JSON.stringify({ createdAt: -1 });
+const DEFAULT_SORT = JSON.stringify({ createdAt: -1 }); // -1: DESC, 1:ASC
 const DEFAULT_MIN_PRICE = 0;
-const DEFAULT_MAX_PRICE = 1000000000000;
+const DEFAULT_MAX_PRICE = 10000000000000;
 
-const ProductsFilter = () => {
+const ProductsFilter = ({ productBrands, productCategories }) => {
   const router = useRouter();
 
   const [sort, setSort] = useState(DEFAULT_SORT);
@@ -51,7 +51,7 @@ const ProductsFilter = () => {
   }
 
   return (
-    <aside className="shadow-md py-8 px-6 rounded-xl bg-white dark:bg-gray-800">
+    <aside className="self-start md:sticky top-20 shadow-md py-8 px-6 rounded-xl bg-white dark:bg-gray-800">
       <h3 className="font-semibold text-xl">Products filter</h3>
 
       <div className="py-3">
@@ -64,6 +64,7 @@ const ProductsFilter = () => {
           onChange={(e) => setName(e.target.value)}
         />
       </div>
+
       <div className="py-3">
         <h4 className="mb-1 font-semibold">Sort By</h4>
         <select
@@ -109,6 +110,8 @@ const ProductsFilter = () => {
         <input
           name="max"
           id="max"
+          type="number"
+          min={DEFAULT_MIN_PRICE}
           max={DEFAULT_MAX_PRICE}
           className="border border-gray-300 rounded-md w-full px-2 py-1 mt-1"
           onChange={(e) => setMaxPrice(e.target.value)}
@@ -121,72 +124,37 @@ const ProductsFilter = () => {
           name="category"
           id="category"
           className="border border-gray-300 rounded-md w-full px-2 py-1"
+          value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">Select category</option>
-          <option value="Smartphones">Smartphones</option>
-          <option value="Laptops">Laptops</option>
-          <option value="Smartwatches">Smartwatches</option>
+          {productCategories?.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="py-3">
         <h4 className="mb-1 font-semibold">Brands</h4>
-        <div className="flex items-center justify-start gap-2 py-0.5">
-          <input
-            name="Apple"
-            id="Apple"
-            type="checkbox"
-            onChange={() => handleBrandsFilterChange("Apple")}
-          />
-          <label htmlFor="Apple" className="text-sm text-gray-600">
-            Apple
-          </label>
-        </div>
-        <div className="flex items-center justify-start gap-2 py-0.5">
-          <input
-            name="Samsung"
-            id="Samsung"
-            type="checkbox"
-            onChange={() => handleBrandsFilterChange("Samsung")}
-          />
-          <label htmlFor="Samsung" className="text-sm text-gray-600">
-            Samsung
-          </label>
-        </div>
-        <div className="flex items-center justify-start gap-2 py-0.5">
-          <input
-            name="Google"
-            id="Google"
-            type="checkbox"
-            onChange={() => handleBrandsFilterChange("Google")}
-          />
-          <label htmlFor="Google" className="text-sm text-gray-600">
-            Google
-          </label>
-        </div>
-        <div className="flex items-center justify-start gap-2 py-0.5">
-          <input
-            name="Oneplus"
-            id="Oneplus"
-            type="checkbox"
-            onChange={() => handleBrandsFilterChange("Oneplus")}
-          />
-          <label htmlFor="Oneplus" className="text-sm text-gray-600">
-            Oneplus
-          </label>
-        </div>
-        <div className="flex items-center justify-start gap-2 py-0.5">
-          <input
-            name="Acer"
-            id="Acer"
-            type="checkbox"
-            onChange={() => handleBrandsFilterChange("Acer")}
-          />
-          <label htmlFor="Acer" className="text-sm text-gray-600">
-            Acer
-          </label>
-        </div>
+
+        {productBrands?.map((item) => (
+          <div
+            key={item}
+            className="flex items-center justify-start gap-2 py-0.5"
+          >
+            <input
+              id={item}
+              type="checkbox"
+              checked={brands.includes(item)}
+              onChange={() => handleBrandsFilterChange(item)}
+            />
+            <label htmlFor={item} className="text-sm text-gray-600">
+              {item}
+            </label>
+          </div>
+        ))}
       </div>
 
       <div className="py-3 space-y-2">

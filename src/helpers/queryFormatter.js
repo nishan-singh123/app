@@ -8,6 +8,7 @@ function formatQuery(searchParams) {
   if (searchParams?.category) query += `&category=${searchParams?.category}`;
   if (searchParams?.min) query += `&min=${searchParams?.min}`;
   if (searchParams?.max) query += `&max=${searchParams?.max}`;
+  if (searchParams?.limit) query += `&limit=${searchParams?.limit}`;
 
   return query;
 }

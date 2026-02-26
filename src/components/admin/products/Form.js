@@ -1,14 +1,14 @@
 "use client";
 
 import { addProduct, updateProduct } from "@/api/products";
-import Spinner from "@/components/Spinner";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { FaPlus, FaTimes } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
-import { FaPlus, FaTimes } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Spinner from "@/components/Spinner";
 
 const ProductForm = ({ product }) => {
   const { register, handleSubmit } = useForm({
@@ -33,7 +33,6 @@ const ProductForm = ({ product }) => {
 
     setImageFiles(acceptedFiles);
     setSelectedImages(images);
-    // Do something with the files
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -166,7 +165,6 @@ const ProductForm = ({ product }) => {
             {...register("stock")}
           />
         </div>
-
         <div className="sm:col-span-2">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             Product Images
@@ -257,11 +255,7 @@ const ProductForm = ({ product }) => {
         <span className="mr-2">
           {product ? "Update Product" : "Add Product"}
         </span>
-        {loading ? (
-          <Spinner className="ml-2 h-5 w-5 fill-primary" />
-        ) : (
-          <FaPlus />
-        )}
+        {loading ? <Spinner className="h-5 w-5 fill-primary" /> : <FaPlus />}
       </button>
     </form>
   );
