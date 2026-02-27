@@ -1,4 +1,4 @@
-import { PRODUCT_MANAGEMENT_ROUTE } from "@/constants/routes";
+import { PRODUCT_MANAGEMENT_ROUTE, PRODUCTS_ROUTE } from "@/constants/routes";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,23 +17,25 @@ const ProductsTable = ({ products }) => {
               key={index}
               className="border-b border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              <th
-                scope="row"
-                className="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {product.imageUrls.length > 0 ? (
-                  <Image
-                    src={product.imageUrls[0]}
-                    alt={product.name}
-                    height={100}
-                    width={150}
-                    className="w-8 h-8 mr-3 object-contain"
-                  />
-                ) : (
-                  <FaImage className="w-8 h-8 mr-3 text-gray-300" />
-                )}
+              <th scope="row" className="text-gray-900 dark:text-white">
+                <Link
+                  href={`${PRODUCTS_ROUTE}/${product._id}`}
+                  className="flex items-center px-4 py-2 font-medium whitespace-nowrap hover:underline"
+                >
+                  {product.imageUrls.length > 0 ? (
+                    <Image
+                      src={product.imageUrls[0]}
+                      alt={product.name}
+                      height={100}
+                      width={150}
+                      className="w-8 h-8 mr-3 object-contain"
+                    />
+                  ) : (
+                    <FaImage className="w-8 h-8 mr-3 text-gray-300" />
+                  )}
 
-                {product.name}
+                  {product.name}
+                </Link>
               </th>
               <td className="px-4 py-2">
                 <span className="bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded dark:bg-primary dark:text-white">

@@ -40,12 +40,12 @@ const OrdersTable = ({ loading, orders }) => {
         {loading ? (
           <tbody>
             <tr>
-            <td colSpan={8}>
-              <div className="flex items-center justify-center py-10">
-                <Spinner className="h-12 w-12 fill-primary" />
-              </div>
-            </td>
-          </tr>
+              <td colSpan={8}>
+                <div className="flex items-center justify-center py-10">
+                  <Spinner className="h-12 w-12 fill-primary" />
+                </div>
+              </td>
+            </tr>
           </tbody>
         ) : (
           <tbody>
